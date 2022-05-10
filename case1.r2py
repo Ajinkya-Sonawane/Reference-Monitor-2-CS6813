@@ -1,0 +1,6 @@
+myfile=ABopenfile("bug.txt",True) 
+
+try:
+    myfile.writeat("SE",500)
+except Exception:
+    log('Error at the specified character')
