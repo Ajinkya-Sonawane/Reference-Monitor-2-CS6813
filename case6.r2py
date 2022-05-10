@@ -1,0 +1,17 @@
+# Clean up of existing file
+if "testfile.txt.a" in listfiles():
+  removefile("testfile.txt.a")
+if "testfile.txt.b" in listfiles():
+  removefile("testfile.txt.b")
+
+# Open File Function Call
+myfile=ABopenfile("testfile.txt",True)  #Create an AB file
+
+# Write valid data to the file
+try:
+  myfile.writeat("StestE",100)
+except:
+  log("ERROR ATTACK 5 | Offset greater than filesize or EOF not handled!\n")
+  
+#Close the file
+myfile.close()
