@@ -1,0 +1,23 @@
+# Clean up of existing file
+if "testfile.txt.a" in listfiles():
+  removefile("testfile.txt.a")
+if "testfile.txt.b" in listfiles():
+  removefile("testfile.txt.b")
+
+# Open File Function Call
+myfile=ABopenfile("testfile.txt",True)  #Create an AB file
+
+# Write invalid data to the file
+myfile.writeat(" SEEEESE",0)     #insert space in the beginning
+
+#Close the file
+myfile.close()
+# Reopen file again to read
+myfile=ABopenfile("testfile.txt",True)
+
+try:
+ assert ("SE" == myfile.readat(None,0))
+ myfile.close()
+except:
+ log("Invalid write")
+ myfile.close()
