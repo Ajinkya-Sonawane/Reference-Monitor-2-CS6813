@@ -1,0 +1,36 @@
+# Test initiate (i) -> append (a) -> close (c) -> open (o) -> read (r)
+
+# Clean up of existing file
+if "testfile.txt.a" in listfiles():
+    removefile("testfile.txt.a")
+if "testfile.txt.b" in listfiles():
+    removefile("testfile.txt.b")
+
+# Initiate File Function Call
+myfile=ABopenfile("testfile.txt",True)
+
+# Write S to SOF
+content = "S"
+myfile.writeat(content, 0)
+
+offset = 1
+for i in range(1000):
+    # Write data to EOF
+    myfile.writeat('x',offset)
+    content += "x"
+    offset += 1
+
+# Write E to EOF
+myfile.writeat("E",offset)
+content += "E"
+
+myfile.close()
+
+myfile=ABopenfile("testfile.txt",False)
+
+# Read the file to check the contents
+try:
+    assert(content == myfile.readat(None,0))
+except:
+    log("iacor returned incorrect result. ")
+
